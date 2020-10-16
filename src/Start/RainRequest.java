@@ -8,8 +8,13 @@ import java.net.URL;
  */
 public class RainRequest {
     private String htmlText;
+    private String url;
 
-    public void save(String name){
+    public RainRequest(String url) {
+        this.url = url;
+    }
+
+    public void save(String name) {
         try {
             FileOutputStream saveStream = new FileOutputStream(name + ".html");
             byte[] htmlBytes = htmlText.getBytes();
@@ -26,10 +31,10 @@ public class RainRequest {
     /**
      * Get请求
      *
-     * @param url 地址
+     * @param s
      * @return html文本
      */
-    public String get(String url){
+    public String get(String s) {
         StringBuilder buffer = new StringBuilder();
         InputStreamReader reader;
         InputStream urlStream;
