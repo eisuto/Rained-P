@@ -9,4 +9,4 @@
 * 即刻探索您身边的世界
 
 [GitHub](https://github.com/eisuto/Rained)
-[Get Started](#quick-start)
+[Get Started](https://github.com/eisuto/Rained/archive/main.zip)
