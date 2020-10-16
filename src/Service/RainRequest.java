@@ -1,14 +1,14 @@
-package Start;
+package Service;
 
 import java.io.*;
 import java.net.URL;
+import java.util.HashMap;
 
 /**
  * 请求器
  * @author eisuto
  */
 public class RainRequest {
-    private String htmlText;
     private String url;
 
     public RainRequest(String url) {
@@ -16,29 +16,11 @@ public class RainRequest {
     }
 
     /**
-     *
-     * @param name 文件名
-     */
-    public void save(String name) {
-        try {
-            FileOutputStream saveStream = new FileOutputStream(name + ".html");
-            byte[] htmlBytes = htmlText.getBytes();
-            for (byte b : htmlBytes) {
-                saveStream.write(b);
-            }
-            saveStream.close();
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-
-    }
-
-    /**
      * Get请求
      *
-     * @return html文本
+     * @return Page对象
      */
-    public String get() {
+    public Page get() {
         StringBuilder buffer = new StringBuilder();
         InputStreamReader reader;
         InputStream urlStream;
@@ -57,7 +39,15 @@ public class RainRequest {
         } catch (IOException e) {
             e.printStackTrace();
         }
-        htmlText = buffer.toString();
-        return htmlText;
+        return new Page(buffer.toString());
+    }
+
+    /**
+     * Post 请求
+     * @param parameters 请求参数
+     * @return 反序列化后的Json
+     */
+    public HashMap<String,String> post(HashMap<String,String> parameters){
+        return null;
     }
 }
