@@ -26,7 +26,7 @@ public class RainRequest {
             e.printStackTrace();
         }
 
-    }
+    } 
 
     /**
      * Get请求
