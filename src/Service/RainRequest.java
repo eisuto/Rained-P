@@ -4,6 +4,7 @@ import java.io.*;
 import java.net.URL;
 
 /**
+ * 请求器
  * @author eisuto
  */
 public class RainRequest {
@@ -14,6 +15,10 @@ public class RainRequest {
         this.url = url;
     }
 
+    /**
+     *
+     * @param name 文件名
+     */
     public void save(String name) {
         try {
             FileOutputStream saveStream = new FileOutputStream(name + ".html");
@@ -31,10 +36,9 @@ public class RainRequest {
     /**
      * Get请求
      *
-     * @param s
      * @return html文本
      */
-    public String get(String s) {
+    public String get() {
         StringBuilder buffer = new StringBuilder();
         InputStreamReader reader;
         InputStream urlStream;
