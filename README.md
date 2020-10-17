@@ -11,11 +11,11 @@ When the rain is over...
 此库旨在保持轻便的同时，又不失强大的抓取能力。  
 
 使用此库时，您将获得：
-- JQuery风格的CSS选择器
-- 完全自定义的User-agent
-- 多线程的支持
-- 梦幻般的请求体验
-- 使用Rained就像学习魔法一样简单  
+- JQuery风格的CSS选择器🥢
+- 完全自定义的User-agent🎫
+- 多线程的支持是🚄
+- 梦幻般的请求体验✨
+- 使用Rained就像学习魔法一样简单🎩
   
 
 [雨停了，开始使用Rained吧！](https://eisuto.github.io/Rained/#/)

@@ -1,5 +1,3 @@
-package Service;
-
 /**
  * 下载器
  */

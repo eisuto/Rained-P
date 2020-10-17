@@ -1,5 +1,3 @@
-package Service;
-
 /**
  * 管道
  */

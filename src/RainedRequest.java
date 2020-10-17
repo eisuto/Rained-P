@@ -11,9 +11,9 @@ import java.util.Map;
  *
  * @author eisuto
  */
-public class RainRequest {
+public class RainedRequest {
 
-    public RainRequest() {
+    public RainedRequest() {
 
     }
 
@@ -153,7 +153,7 @@ public class RainRequest {
      * @param postBody 请求参数
      * @return 反序列化后的Json
      */
-    public String postRequest(String url,HashMap<String, String> postBody) {
+    public String post(String url,HashMap<String, String> postBody) {
         try {
             URL u = new URL(url);
             HttpURLConnection httpURLConnection = (HttpURLConnection) u.openConnection();
