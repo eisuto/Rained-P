@@ -7,7 +7,7 @@ import java.util.List;
 /**
  * 响应
  */
-class Response {
+public class Response {
 
     /**
      * 响应体

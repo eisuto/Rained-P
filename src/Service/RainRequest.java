@@ -15,7 +15,6 @@ import java.util.Map;
 public class RainRequest {
     private String url;
 
-    private HashMap<String, String> postBody;
 
     public RainRequest(String url) {
         this.url = url;
@@ -48,9 +47,9 @@ public class RainRequest {
     /**
      * 快速Get
      *
-     * @return Page对象
+     * @return Response对象
      */
-    public Page quickGet() {
+    public Response quickGet() {
         StringBuilder buffer = new StringBuilder();
         InputStreamReader reader;
         InputStream urlStream;
@@ -68,7 +67,7 @@ public class RainRequest {
         } catch (IOException e) {
             e.printStackTrace();
         }
-        return new Page(buffer.toString());
+        return new Response(buffer.toString());
     }
 
 
@@ -106,33 +105,91 @@ public class RainRequest {
     /**
      * 带参Get请求
      *
-     * @return Page对象
+     * @return Response对象
      */
-    public Page get(HashMap<String, String> getParameters) {
+    public Response get(HashMap<String, String> getParameters) {
         String requestUrl = creatGetUrl(getParameters);
-        return new Page(getRequest(requestUrl).toString());
+        return new Response(getRequest(requestUrl).toString());
     }
 
 
     /**
      * 不带参Get请求
      *
-     * @return Page对象
+     * @return Response对象
      */
-    public Page get() {
-        return new Page(getRequest(this.url).toString());
+    public Response get() {
+        return new Response(getRequest(this.url).toString());
+    }
+
+
+    /**
+     * 构造post体
+     *
+     * @param postBody postMap
+     * @return post体
+     */
+    public String creatpostBody(HashMap<String, String> postBody) {
+        StringBuilder buffer = new StringBuilder();
+        try {
+            if (postBody != null) {
+                for (Map.Entry<String, String> entry : postBody.entrySet()) {
+                    buffer.append("&");
+                    buffer.append(entry.getKey());
+                    buffer.append("=");
+                    buffer.append(entry.getValue());
+                }
+                return buffer.substring(1);
+            } else {
+                throw new Exception("请求异常");
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return buffer.toString();
     }
 
 
     /**
      * Post 请求
      *
-     * @param parameters 请求参数
+     * @param postBody 请求参数
      * @return 反序列化后的Json
      */
-    public HashMap<String, String> post(HashMap<String, String> parameters) {
-        return null;
+    public String postRequest(HashMap<String, String> postBody) {
+        URL url;
+        try {
+            url = new URL(this.url);
+            HttpURLConnection httpURLConnection = (HttpURLConnection) url.openConnection();
+            httpURLConnection.setRequestMethod("POST");
+            //连接超时ms
+            httpURLConnection.setConnectTimeout(10000);
+            //读取超时ms
+            httpURLConnection.setReadTimeout(2000);
+            httpURLConnection.setDoOutput(true);
+            httpURLConnection.setDoInput(true);
 
+            // 获取URLConnection对象对应的输出流
+            PrintWriter printWriter = new PrintWriter(httpURLConnection.getOutputStream());
+            //添加body
+            printWriter.write(creatpostBody(postBody));
+            // flush输出流的缓冲
+            printWriter.flush();
+            //获取数据
+            BufferedInputStream bis = new BufferedInputStream(httpURLConnection.getInputStream());
+            ByteArrayOutputStream bos = new ByteArrayOutputStream();
+            int len;
+            byte[] arr = new byte[1024];
+            while ((len = bis.read(arr)) != -1) {
+                bos.write(arr, 0, len);
+                bos.flush();
+            }
+            bos.close();
+            return bos.toString("utf-8");
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return null;
 
     }
 }
