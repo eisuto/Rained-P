@@ -5,12 +5,12 @@ import java.io.IOException;
 import java.util.List;
 
 /**
- * 页面
+ * 响应
  */
-public class Page {
+class Response {
 
     /**
-     * 当前页面的html体
+     * 响应体
      */
     private String html;
 
@@ -24,7 +24,7 @@ public class Page {
      *
      * @param html html文本
      */
-    Page(String html) {
+    Response(String html) {
         this.html = html;
         if (html != null) {
             //使用选择器将此处获取当前页面全部链接
@@ -53,7 +53,7 @@ public class Page {
 
     @Override
     public String toString() {
-        return "Page{" +
+        return "Response{" +
                 "html='" + html + '\'' +
                 '}';
     }
