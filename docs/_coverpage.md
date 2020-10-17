@@ -5,8 +5,10 @@
 
 * jQuery风格CSS选择器
 * 完全自定义的User-agent
+* 多线程的支持
+* 梦幻般的请求体验
 * 使用Rained就像学习魔法一样容易
-* 即刻探索您身边的世界
+
 
 [GitHub](https://github.com/eisuto/Rained)
 [Get Started](https://github.com/eisuto/Rained/archive/main.zip)
