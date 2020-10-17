@@ -1,4 +1,3 @@
-package Service;
 
 import java.io.*;
 import java.net.HttpURLConnection;
@@ -13,11 +12,9 @@ import java.util.Map;
  * @author eisuto
  */
 public class RainRequest {
-    private String url;
 
+    public RainRequest() {
 
-    public RainRequest(String url) {
-        this.url = url;
     }
 
 
@@ -27,7 +24,7 @@ public class RainRequest {
      * @param getParameters 要构造的参数
      * @return url串
      */
-    private String creatGetUrl(HashMap<String, String> getParameters) {
+    private String creatGetUrl(HashMap<String, String> getParameters,String url) {
         StringBuilder buffer = new StringBuilder(url);
         if (getParameters != null) {
             buffer.append("?");
@@ -49,14 +46,14 @@ public class RainRequest {
      *
      * @return Response对象
      */
-    public Response quickGet() {
+    public Response quickGet(String url) {
         StringBuilder buffer = new StringBuilder();
         InputStreamReader reader;
         InputStream urlStream;
         String line;
         try {
-            URL url = new URL(this.url);
-            urlStream = url.openStream();
+            URL u = new URL(url);
+            urlStream = u.openStream();
             reader = new InputStreamReader(urlStream);
             BufferedReader buff = new BufferedReader(reader);
             while ((line = buff.readLine()) != null) {
@@ -107,8 +104,8 @@ public class RainRequest {
      *
      * @return Response对象
      */
-    public Response get(HashMap<String, String> getParameters) {
-        String requestUrl = creatGetUrl(getParameters);
+    public Response get(String url,HashMap<String, String> getParameters) {
+        String requestUrl = creatGetUrl(getParameters,url);
         return new Response(getRequest(requestUrl).toString());
     }
 
@@ -118,8 +115,8 @@ public class RainRequest {
      *
      * @return Response对象
      */
-    public Response get() {
-        return new Response(getRequest(this.url).toString());
+    public Response get(String url) {
+        return new Response(getRequest(url).toString());
     }
 
 
@@ -156,11 +153,10 @@ public class RainRequest {
      * @param postBody 请求参数
      * @return 反序列化后的Json
      */
-    public String postRequest(HashMap<String, String> postBody) {
-        URL url;
+    public String postRequest(String url,HashMap<String, String> postBody) {
         try {
-            url = new URL(this.url);
-            HttpURLConnection httpURLConnection = (HttpURLConnection) url.openConnection();
+            URL u = new URL(url);
+            HttpURLConnection httpURLConnection = (HttpURLConnection) u.openConnection();
             httpURLConnection.setRequestMethod("POST");
             //连接超时ms
             httpURLConnection.setConnectTimeout(10000);
