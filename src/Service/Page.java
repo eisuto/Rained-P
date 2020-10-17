@@ -21,11 +21,12 @@ public class Page {
 
     /**
      * 构造时
+     *
      * @param html html文本
      */
     Page(String html) {
         this.html = html;
-        if(html!=null){
+        if (html != null) {
             //使用选择器将此处获取当前页面全部链接
             links = null;
         }
@@ -33,6 +34,7 @@ public class Page {
 
     /**
      * 保存为html文件
+     *
      * @param name 文件名
      */
     public void save(String name) {

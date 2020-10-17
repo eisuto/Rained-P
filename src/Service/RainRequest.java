@@ -14,21 +14,23 @@ import java.util.Map;
  */
 public class RainRequest {
     private String url;
-    private HashMap<String, String> getParameters;
+
     private HashMap<String, String> postBody;
 
     public RainRequest(String url) {
         this.url = url;
     }
 
+
     /**
-     * 构造get请求url
+     * 构造 带参Get 的url
      *
+     * @param getParameters 要构造的参数
      * @return url串
      */
-    private String creatGetUrl() {
+    private String creatGetUrl(HashMap<String, String> getParameters) {
         StringBuilder buffer = new StringBuilder(url);
-        if(getParameters!=null){
+        if (getParameters != null) {
             buffer.append("?");
             for (Map.Entry<String, String> entry : getParameters.entrySet()) {
                 buffer.append(entry.getKey());
@@ -42,19 +44,19 @@ public class RainRequest {
         return buffer.toString();
     }
 
+
     /**
-     * Get请求
+     * 快速Get
      *
      * @return Page对象
      */
-    public Page get() {
-        String requestUrl = creatGetUrl();
+    public Page quickGet() {
         StringBuilder buffer = new StringBuilder();
         InputStreamReader reader;
         InputStream urlStream;
         String line;
         try {
-            URL url = new URL(requestUrl);
+            URL url = new URL(this.url);
             urlStream = url.openStream();
             reader = new InputStreamReader(urlStream);
             BufferedReader buff = new BufferedReader(reader);
@@ -69,9 +71,11 @@ public class RainRequest {
         return new Page(buffer.toString());
     }
 
-    public Page getX() {
 
-        String requestUrl = creatGetUrl();
+    /**
+     * Get请求器
+     */
+    private StringBuilder getRequest(String requestUrl) {
         StringBuilder buffer = new StringBuilder();
         try {
             URL url = new URL(requestUrl);
@@ -95,8 +99,30 @@ public class RainRequest {
         } catch (Exception e) {
             e.printStackTrace();
         }
-        return new Page(buffer.toString());
+        return buffer;
     }
+
+
+    /**
+     * 带参Get请求
+     *
+     * @return Page对象
+     */
+    public Page get(HashMap<String, String> getParameters) {
+        String requestUrl = creatGetUrl(getParameters);
+        return new Page(getRequest(requestUrl).toString());
+    }
+
+
+    /**
+     * 不带参Get请求
+     *
+     * @return Page对象
+     */
+    public Page get() {
+        return new Page(getRequest(this.url).toString());
+    }
+
 
     /**
      * Post 请求
