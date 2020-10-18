@@ -11,4 +11,4 @@
 
 
 [GitHub](https://github.com/eisuto/Rained)
-[Get Started](https://github.com/eisuto/Rained/archive/main.zip)
+[Get Started](#main)

@@ -1,5 +1,5 @@
 ## 安装
-[👉下载jar包](https://github.com/eisuto/Rained/releases/download/v0.0.1/Rained-v0.0.1.jar)  
+[👉下载jar包](https://github.com/eisuto/Rained/releases/download/v0.0.1/Rained-v0.0.1-alpha.jar)
 
 - idea导入
 ```Text
