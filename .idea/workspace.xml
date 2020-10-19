@@ -8,8 +8,8 @@
   <component name="ChangeListManager">
     <list default="true" id="6821f1aa-9ee6-462f-a76b-287721fb8918" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/AgentGenerator.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/AgentGenerator.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/RainedRequest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/RainedRequest.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Parser.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Parser.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Response.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Response.java" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -86,7 +86,7 @@
       <workItem from="1602851260474" duration="1860000" />
       <workItem from="1602895413377" duration="1942000" />
       <workItem from="1602897583557" duration="15561000" />
-      <workItem from="1603070507537" duration="1274000" />
+      <workItem from="1603070507537" duration="3203000" />
     </task>
     <servers />
   </component>
