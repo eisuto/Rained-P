@@ -24,7 +24,7 @@ public class RainedRequest {
      * @param getParameters 要构造的参数
      * @return url串
      */
-    private String creatGetUrl(HashMap<String, String> getParameters,String url) {
+    private String creatGetUrl(HashMap<String, String> getParameters, String url) {
         StringBuilder buffer = new StringBuilder(url);
         if (getParameters != null) {
             buffer.append("?");
@@ -71,11 +71,16 @@ public class RainedRequest {
     /**
      * Get请求器
      */
-    private StringBuilder getRequest(String requestUrl) {
+    private StringBuilder getRequest(String requestUrl, String agent) {
         StringBuilder buffer = new StringBuilder();
         try {
             URL url = new URL(requestUrl);
             HttpURLConnection urlCon = (HttpURLConnection) url.openConnection();
+            //定义user-agent
+            if (agent == null) {
+                agent = AgentGenerator.creat();
+            }
+            urlCon.setRequestProperty("user-agent", agent);
             System.out.println(urlCon.getResponseCode());
             if (200 == urlCon.getResponseCode()) {
                 InputStream is = urlCon.getInputStream();
@@ -100,25 +105,49 @@ public class RainedRequest {
 
 
     /**
-     * 带参Get请求
+     * 带参Get请求 自定义user-agent
      *
+     * @param url           地址
+     * @param agent         user-agent
+     * @param getParameters 请求参数
      * @return Response对象
      */
-    public Response get(String url,HashMap<String, String> getParameters) {
-        String requestUrl = creatGetUrl(getParameters,url);
-        return new Response(getRequest(requestUrl).toString());
+    public Response get(String url, HashMap<String, String> getParameters, String agent) {
+        String requestUrl = creatGetUrl(getParameters, url);
+        return new Response(getRequest(requestUrl, agent).toString());
     }
 
+    /**
+     * 带参Get请求 生成的user-agent
+     *
+     * @param url           地址
+     * @param getParameters 请求参数
+     * @return Response对象
+     */
+    public Response get(String url, HashMap<String, String> getParameters) {
+        String requestUrl = creatGetUrl(getParameters, url);
+        return new Response(getRequest(requestUrl, null).toString());
+    }
 
     /**
-     * 不带参Get请求
+     * 不带参Get请求 自定义user-agent
      *
+     * @param agent user-agent
+     * @return Response对象
+     */
+    public Response get(String url, String agent) {
+        return new Response(getRequest(url, agent).toString());
+    }
+
+    /**
+     * 不带参Get请求 生成的user-agent
+     *
+     * @param url 地址
      * @return Response对象
      */
     public Response get(String url) {
-        return new Response(getRequest(url).toString());
+        return new Response(getRequest(url, null).toString());
     }
-
 
     /**
      * 构造post体
@@ -153,7 +182,7 @@ public class RainedRequest {
      * @param postBody 请求参数
      * @return 反序列化后的Json
      */
-    public String post(String url,HashMap<String, String> postBody) {
+    public String post(String url, HashMap<String, String> postBody) {
         try {
             URL u = new URL(url);
             HttpURLConnection httpURLConnection = (HttpURLConnection) u.openConnection();
